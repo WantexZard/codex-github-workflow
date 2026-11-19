@@ -19,13 +19,21 @@
 
 ## 安装
 
-在 Codex 会话中调用内置安装器：
+先在 Codex 实际运行命令的终端里确认工具和登录状态：
 
-```text
-$skill-installer install https://github.com/WantexZard/codex-github-workflow/tree/main/skills/github-workflow
+```bash
+git --version
+gh --version
+gh auth status --hostname github.com
 ```
 
-也可以把 [`skills/github-workflow/SKILL.md`](skills/github-workflow/SKILL.md) 放进 Codex 用户技能目录下的 `github-workflow/SKILL.md`。安装后若找不到技能，刷新或重启 Codex 后查看技能列表。
+如果还没登录，就在同一个终端运行 `gh auth login --hostname github.com`。然后在 Codex 会话中输入：
+
+```text
+用 $skill-installer 安装 https://github.com/WantexZard/codex-github-workflow/tree/main/skills/github-workflow
+```
+
+手动安装时，可把 [`skills/github-workflow/SKILL.md`](skills/github-workflow/SKILL.md) 复制到与内置安装器相同的位置 `$CODEX_HOME/skills/github-workflow/SKILL.md`。未设置 `CODEX_HOME` 时，安装器默认使用 `~/.codex`。安装后新开一个 Codex 会话。如果仍找不到技能，重启 Codex 并核对它实际使用的 `CODEX_HOME`。
 
 ## 用法示例
 
@@ -34,6 +42,8 @@ $github-workflow 只提交本次改动的 README，其他修改留在工作区�
 $github-workflow 把当前分支推到我的 fork，PR 稍后再开。
 $github-workflow 从我的 fork 向 example-org/sample-app 的 main 分支开一个草稿 PR。
 ```
+
+已在 WSL 验证 Codex 能发现技能，并验证按范围暂存、提交和推送指定分支。推送验收使用临时本地 Git 远端。实际开 PR 取决于 GitHub 上的目标仓库和 fork 权限。
 
 ## 与现有项目的区别
 
